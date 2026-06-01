@@ -1,0 +1,450 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ======================================================
+   ROOT DESIGN TOKENS
+====================================================== */
+
+:root {
+  --bg: #050816;
+  --bg-soft: #0b1022;
+
+  --panel: rgba(255, 255, 255, 0.05);
+  --panel-strong: rgba(255, 255, 255, 0.08);
+
+  --border: rgba(255, 255, 255, 0.10);
+
+  --text: #ffffff;
+  --muted: #94a3b8;
+
+  --primary: #8b5cf6;
+  --secondary: #22d3ee;
+  --accent: #3b82f6;
+
+  --success: #22c55e;
+  --warning: #facc15;
+  --danger: #ef4444;
+}
+
+/* ======================================================
+   RESET
+====================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  font-family: "Inter", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  scroll-behavior: smooth;
+}
+
+/* ======================================================
+   MAIN BACKGROUND (ENHANCED DEPTH LAYER)
+====================================================== */
+
+body {
+  position: relative;
+  background:
+    radial-gradient(circle at top left,
+      rgba(139, 92, 246, 0.18),
+      transparent 25%),
+
+    radial-gradient(circle at bottom right,
+      rgba(34, 211, 238, 0.14),
+      transparent 25%),
+
+    radial-gradient(circle at center,
+      rgba(59, 130, 246, 0.08),
+      transparent 35%),
+
+    #050816;
+}
+
+/* EXTRA DEPTH FOR DASHBOARD (NEW) */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(139,92,246,0.08), transparent 40%),
+    radial-gradient(circle at 70% 80%, rgba(34,211,238,0.06), transparent 45%);
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* ======================================================
+   GRID BACKGROUND
+====================================================== */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+
+  background-size: 44px 44px;
+  opacity: 0.4;
+  z-index: -1;
+}
+
+/* ======================================================
+   TEXT SELECTION
+====================================================== */
+
+::selection {
+  background: rgba(139, 92, 246, 0.3);
+  color: white;
+}
+
+/* ======================================================
+   PREMIUM GLASS SYSTEM
+====================================================== */
+
+.glass {
+  background: rgba(15, 23, 42, 0.55);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(18px);
+
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 8px 30px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+
+  border-radius: 24px;
+}
+
+.glass:hover {
+  transform: translateY(-2px);
+  border-color: rgba(139, 92, 246, 0.35);
+  background: rgba(15, 23, 42, 0.65);
+}
+
+/* ======================================================
+   PANEL (UPGRADED FOR DASHBOARD CARDS)
+====================================================== */
+
+.panel {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.05),
+      rgba(255,255,255,0.02)
+    );
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(18px);
+
+  border-radius: 24px;
+
+  padding: 20px;
+
+  transition: all 0.25s ease;
+}
+
+.panel:hover {
+  transform: translateY(-3px);
+  border-color: rgba(139,92,246,0.4);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+}
+
+/* ======================================================
+   CARD
+====================================================== */
+
+.card {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.05),
+      rgba(255,255,255,0.02)
+    );
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(18px);
+
+  border-radius: 24px;
+
+  padding: 20px;
+
+  transition: 0.25s ease;
+}
+
+.card:hover {
+  border-color: rgba(139,92,246,0.4);
+  transform: translateY(-3px);
+}
+
+/* ======================================================
+   BUTTONS
+====================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 14px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), #7c3aed);
+  color: white;
+  padding: 14px 24px;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(139,92,246,0.35);
+}
+
+/* ======================================================
+   INPUTS
+====================================================== */
+
+.input {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 14px 18px;
+  color: white;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.input:focus {
+  border-color: rgba(139,92,246,0.6);
+  box-shadow: 0 0 0 4px rgba(139,92,246,0.12);
+}
+
+/* ======================================================
+   TEXT
+====================================================== */
+
+h1 {
+  font-size: clamp(2.2rem, 5vw, 5rem);
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+h2 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ======================================================
+   TEXT GRADIENT
+====================================================== */
+
+.text-gradient {
+  background: linear-gradient(to right, #ffffff, #c084fc, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+/* ======================================================
+   GLOW EFFECTS
+====================================================== */
+
+.glow {
+  box-shadow: 0 0 40px rgba(139,92,246,0.22);
+}
+
+.glow-blue {
+  box-shadow: 0 0 40px rgba(34,211,238,0.22);
+}
+
+/* ======================================================
+   ANIMATIONS
+====================================================== */
+
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* ======================================================
+   FLOAT ANIMATION (FOR CARDS / UI ELEMENTS)
+====================================================== */
+
+@keyframes floatUpDown {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.float-slow {
+  animation: floatUpDown 6s ease-in-out infinite;
+}
+
+.float-medium {
+  animation: floatUpDown 4s ease-in-out infinite;
+}
+
+.float-fast {
+  animation: floatUpDown 2.8s ease-in-out infinite;
+}
+/* ======================================================
+   ⭐ BADGE SYSTEM (HACKERRANK STYLE UPGRADE)
+====================================================== */
+
+@keyframes badgePop {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+    filter: blur(4px);
+  }
+  60% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.badge-animate {
+  animation: badgePop 0.45s ease-out;
+}
+
+/* locked badge effect */
+.badge-locked {
+  filter: grayscale(1);
+  opacity: 0.4;
+}
+
+/* unlocked glow pulse */
+@keyframes badgeGlow {
+  0% { box-shadow: 0 0 0 rgba(139,92,246,0); }
+  50% { box-shadow: 0 0 25px rgba(139,92,246,0.4); }
+  100% { box-shadow: 0 0 0 rgba(139,92,246,0); }
+}
+
+.badge-unlocked {
+  animation: badgeGlow 2.2s infinite;
+}
+
+/* ======================================================
+   🧠 STREAK / CALENDAR SUPPORT (FOR MODAL POPUP)
+====================================================== */
+
+.streak-backdrop {
+  backdrop-filter: blur(14px);
+  background: rgba(0,0,0,0.5);
+}
+
+/* ======================================================
+   📊 HEATMAP CLEAN STYLE SUPPORT
+====================================================== */
+
+.heatmap-cell {
+  transition: 0.2s ease;
+  border-radius: 4px;
+}
+
+.heatmap-cell:hover {
+  transform: scale(1.2);
+}
+
+/* ======================================================
+   HOVER LIFT SYSTEM
+====================================================== */
+
+.hover-lift {
+  transition: all 0.25s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+
+/* ======================================================
+   SCROLLBAR
+====================================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139,92,246,0.45);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+/* ======================================================
+   FIX DROPDOWN / SELECT DARK THEME ISSUE
+====================================================== */
+
+select {
+  background-color: rgba(15, 23, 42, 0.95) !important; /* dark panel */
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+/* dropdown options */
+select option {
+  background-color: #0b1022 !important; /* deep bg */
+  color: white !important;
+}
+
+/* hover fix (some browsers) */
+select option:hover {
+  background-color: #8b5cf6 !important;
+  color: white !important;
+}
